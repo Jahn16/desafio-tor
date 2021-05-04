@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "ProtoSans";
+  src: url("../fonts/ProtoSans53.otf") format("opentype");
+}
+.navbar-brand {
+    font-family: "ProtoSans";
+}
+#title {
+    text-align: center;
+    padding: 1.5%
+}
+#table-container {
+    width: 80%;
+    margin: auto;
+}
+.step-links {
+    width:50%;
+    margin: auto;
+    text-align: center;
+}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} IPs {% endblock %}
+{% block content %}
+<h1 id="title" >IPs</h1>
+<div id="table-container">
+    <table id="ip-table" class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">IP</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for ip in ips %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ ip.ip_address }}</td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+<div  class="pagination">
+    <span class="step-links" >
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Primeira</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Próxima</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

@@ -8,10 +8,15 @@ from utils import tor_data
 
 
 class IpListAPIView(ListAPIView):
+    """Display all the IPs from external sources and from the internal database"""
     serializer_class = IpSerializer
     pagination_class = IPPageNumberPagination
 
     def get_queryset(self):
+        """Gets the list with objects that will be displayed
+
+        :return: List with IPs from external sources and from the internal database
+        """
         tor_nodes = tor_data.get_tor_nodes()
         tor_hostnames = tor_data.get_tor_relays_exit_addresses()
         ips = list(Ip.objects.all())
@@ -30,7 +35,12 @@ class IpListAPIView(ListAPIView):
 
 
 class ExternalSourceIpOnlyListAPIView(IpListAPIView):
+    """Display all the IPs from external sources"""
     def get_queryset(self):
+        """Gets the list with objects that will be displayed
+
+        :return: List with all IPs from external sources
+        """
         queryset = super().get_queryset()
         data_base_ips = Ip.objects.all()
         queryset = queryset[len(data_base_ips):]
@@ -38,7 +48,12 @@ class ExternalSourceIpOnlyListAPIView(IpListAPIView):
 
 
 class InternalSourceIpOnlyListAPIView(IpListAPIView):
+    """Display all the IPs from the internal database"""
     def get_queryset(self):
+        """Gets the list with objects that will be displayed
+
+        :return: List with all IPs from internal database
+        """
         data_base_ips = Ip.objects.all()
         queryset = data_base_ips
         return queryset

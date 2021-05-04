@@ -20,7 +20,7 @@ def get_tor_nodes():
         """
         return isinstance(tor_node, NavigableString) and not isinstance(tor_node, Comment) and tor_node != "\n"
 
-    url = 'http://host.docker.internal:8080/TORNodeList.html'
+    url = 'https://www.dan.me.uk/tornodes'
     request = requests.get(url)
     soup = BeautifulSoup(request.text, 'html.parser')
     tor_node_list_begin = soup.find(string=lambda text: isinstance(text, Comment)
